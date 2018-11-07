@@ -38,7 +38,7 @@ namespace Wox.Plugin.GoogleTranslate
 
         public string[,] Languages =
         {
-            {"Afrikaans", "af"}, {"Albanian", "sq"}, {"Arabic", "ar"},
+            {"Auto Detect", "auto"}, {"Afrikaans", "af"}, {"Albanian", "sq"}, {"Arabic", "ar"},
             {"Azerbaijani", "az"}, {"Bengali", "bn"}, {"Basque", "eu"},
             {"Korean", "ko"}, {"Belarusian", "be"}, {"Bulgarian", "bg"},
             {"Catalan", "ca"}, {"Chinese Simplified", "zh-CN"},
@@ -123,7 +123,7 @@ namespace Wox.Plugin.GoogleTranslate
                             IcoPath = "Images\\pic.png",
                             Action = e =>
                             {
-                                _context.API.ChangeQuery(query.RawQuery + countrycode + " ");
+                                _context.API.ChangeQuery(query.RawQuery + " " + countrycode + " ");
                                 return false;
                             }
                         });
@@ -146,8 +146,7 @@ namespace Wox.Plugin.GoogleTranslate
                         Action = e =>
                         {
                             Process.Start(
-                                "http://www.google.com/translate_t?hl=en&ie=UTF8&text=" + input
-                                + "&langpair=" + from + "|" + to);
+                                "https://translate.google.com/?hl=en&ie=UTF8&text=" + input + "&langpair=" + from + "|" + to + "#" + from + "/" + to + "/" + input);
                             return false;
                         }
                     });
@@ -205,7 +204,7 @@ namespace Wox.Plugin.GoogleTranslate
         public string TranslateText(string input, string from, string to)
         {
             var str1 =
-                GetPageHtml($"http://www.google.com/translate_t?hl=en&ie=UTF8&text={input}&langpair={from}|{to}");
+                GetPageHtml($"https://translate.google.com/?hl=en&ie=UTF8&text={input}&langpair={from}|{to}#{from}/{to}/{input}");
             var str2 = str1.Substring(str1.IndexOf("<span title=\"") + "<span title=\"".Length);
             var str3 = str2.Substring(str2.IndexOf(">") + 1);
             return HttpUtility.HtmlDecode(str3.Substring(0, str3.IndexOf("</span>")).Trim());

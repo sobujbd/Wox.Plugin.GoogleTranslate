@@ -4,9 +4,9 @@
   "Name": "Google Translate",
   "Description": "Plugin that allow you to translate any words to any languages",
   "Author": "Armaldio, boromak",
-  "Version": "1.0.5",
+  "Version": "1.0.6",
   "Language": "csharp",
-  "Website": "http://www.getwox.com",
+  "Website": "http://www.wox.one",
   "IcoPath": "Images\\pic.png",
   "ExecuteFileName": "Wox.Plugin.GoogleTranslate.dll"
 }
